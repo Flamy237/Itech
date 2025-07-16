@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITECH SARL IPTV | VOTRE EXPERIENCE TV PREMIUM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <style>
+        :root {
+            --primary-blue: #0A2240;
+            /* Bleu foncé principal de I-tech Sarl */
+            --secondary-blue: #0E294E;
+            /* Bleu légèrement plus clair pour lesfonds */
+            --accent-blue: #1C4D78;
+            /* Un bleu d'accentuation */
+            --text-light: #ffffff;
+            /* Texte clair */
+            --text-dark: #e0e0e0;
+            /* Texte gris clair */
+            --black-bg: #ece9e9e5;
+            /* Blanc transparent, sera écrasé par la section hero */
+            --header-color: #ece9e9;
+        }
+
+        /* Styles spécifiques pour la section hero */
+        .hero-banner {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,
+                        0.8));
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ffcc00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-button {
+            background-color: #e50914;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-button:hover {
+            background-color: #ff0000;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--black-bg);
+            /* Sera principalement masqué par la section hero */
+            color: var(--text-light);
+        }
+
+        /* Styles généraux pour tous les carrousels d'arrière-plan */
+        .swiper {
+            position: absolute;
+            width: 300%;
+            height: 33.33%;
+            left: 0;
+            z-index: -3;
+        }
+
+        /* Positionnement vertical spécifique pour chaque carrousel */
+        .banner-slide-1 {
+            top: 0;
+        }
+
+        .banner-slide-2 {
+            top: 33.33%;
+        }
+
+        .banner-slide-3 {
+            top: 66.66%;
+        }
+
+        .swiper-wrapper {
+            display: flex;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            width: auto;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .swiper-slide img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
+        /* Keyframes pour les animations de défilement infini */
+        @keyframes slideRightToLeft {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-100vw);
+            }
+        }
+
+        @keyframes slideLeftToRight {
+            0% {
+                transform: translateX(-100vw);
+            }
+
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
+        .banner-slide-1 .swiper-wrapper,
+        .banner-slide-3 .swiper-wrapper {
+            animation: slideRightToLeft 40s linear infinite;
+        }
+
+        .banner-slide-2 .swiper-wrapper {
+            animation: slideLeftToRight 40s linear infinite;
+        }
+
+        .patenaire-logo {
+            overflow: hidden;
+            width: 100%;
+            background: #000;
+            padding: 10px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .slider-track img {
+            height: 60px;
+            margin: 0 20px;
+            object-fit: contain;
+            filter: brightness(1.1);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .gradient-text2 {
+            background: linear-gradient(to right, #dddedf, #adadad, #5b626d);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue),
+                    var(--primary-blue));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-premium {
+            background: linear-gradient(135deg, var(--primary-blue),
+                    var(--secondary-blue));
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue),
+                    var(--primary-blue));
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-blue),
+                    var(--accent-blue));
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+
+        .glow {
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.6), 0 0 30px rgba(0, 123, 255, 0.4);
+        }
+
+.channel-preview {
+    transition: all 0.3s ease-in-out;
+}
+
+.channel-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+        /* FAQ specific styles */
+        .faq-item {
+            border-bottom: 1px solid #333;
+            padding: 1rem 0;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+            padding: 0 1rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            /* Adjust as needed for content */
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header class="bg-white shadow-md z-50 lg:fixed lg:top-0 lg:left-0 relative w-full">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <img src="https://itechservices.cm/assets/images/logos/ITECH-PNG.png" class="h-10"
+                alt="LOGO I-tech Services">
+
+            <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="./index.html#features" class="text-gray-600 hover:text-blue-400 transition">Fonctionnalités</a>
+                <a href="./index.html#pricing" class="text-gray-600 hover:text-blue-400 transition">Nos Offres</a>
+                <a href="./index.html#channels" class="text-gray-600 hover:text-blue-400 transition">Aperçu Chaînes</a>
+                <a href="./index.html#faq" class="text-gray-600 hover:text-blue-400 transition">FAQ</a>
+                <a href="./shop-e.html">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow hover:from-blue-600 hover:to-indigo-700 transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Shop</span>
+                    </button>
+                </a>
+            </nav>
+        </div>
+
+        <div id="mobile-menu"
+            class="fixed top-0 right-0 h-screen w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out md:hidden z-50 p-6 flex flex-col space-y-6">
+            <button id="close-menu" class="self-end text-gray-600 text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <a href="./index.html#features" class="text-gray-700 hover:text-blue-500">Fonctionnalités</a>
+            <a href="./index.html#pricing" class="text-gray-700 hover:text-blue-500">Nos Offres</a>
+            <a href="./index.html#channels" class="text-gray-700 hover:text-blue-500">Aperçu Chaînes</a>
+            <a href="./index.html#faq" class="text-gray-700 hover:text-blue-500">FAQ</a>
+            <a href="./shop-e.html">
+                <button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full 
+                  shadow hover:from-blue-600 hover:to-indigo-700 transition">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Shop</span>
+                </button>
+            </a>
+        </div>
+
+        <script>
+            const toggleBtn = document.getElementById('menu-toggle');
+            const closeBtn = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            toggleBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            }); 
+        </script>
+    </header>
+
+    <main class="pt-16 lg:pt-0">
+        <section id="hero" class="hero-banner">
+            <div class="swiper banner-slide-1 top-slide">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-1.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-2.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-3.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-4.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-1.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-2.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-3.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-4.webp" alt="Slider"></div>
+                </div>
+            </div>
+
+            <div class="swiper banner-slide-2 middle-slide" dir="rtl">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-5.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-6.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-7.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-8.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-5.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-6.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-7.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-8.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-4.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-1.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-11.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-12.webp" alt="Slider"></div>
+                </div>
+            </div>
+
+            <div class="swiper banner-slide-3 bottom-slide">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-9.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-10.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-11.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-12.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-13.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-9.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-9.webp" alt="Slider"></div>
+                    <div class="swiper-slide"><img decoding="async"
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-11.webp" alt="Slider"></div>
+                </div>
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="text-center px-4 py-10 sm:py-12 md:py-16 lg:py-20 max-w-4xl mx-auto">
+                <p class="hero-subtitle">FASTEST IPTV CONNECTION</p>
+                <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl">Le premier fournisseur IPTV<br> que vous allez
+                    vraiment
+                    apprécier.</h1>
+                <p class="hero-description text-base sm:text-lg">Dites
+                    adieu aux coupures et aux ralentissements. Profitez d'un
+                    divertissement en HD et 4K d'une clarté exceptionnelle, avec plus de
+                    30 000 chaînes, dont les meilleurs sports des USA et du Royaume-Uni,
+                    ainsi que vos programmes internationaux préférés.</p>
+                <a href="#pricing" class="hero-button inline-block">CHOOSE YOUR SUBSCRIPTION PLAN</a>
+
+                <div class="partenaire-logo mt-10">
+                    <div class="slider-track">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/fox.png" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/disney.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/netflix.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/prime-video.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/fi.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/bein.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/videoland.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/viaplay.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/apple-tv-icon.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/film.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/fox.png" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/disney.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/netflix.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/prime-video.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/fi.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/bein.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/videoland.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/viaplay.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/apple-tv-icon.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                        <img src="https://tellystudio.com/wp-content/uploads/2025/01/disney.webp" alt="HBO Logo"
+                            class="hero-logo-hbo mx-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features py-10 md:py-20 text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 md:mb-16 text-center gradient-text">Pourquoi choisir
+                    I-tech Sarl IPTV
+                    ?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <div class="bg-premium p-6 md:p-8 rounded-xl hover-scale flex flex-col items-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-10 w-10 md:h-12 md:w-12 mb-4 md:mb-6 text-blue-400" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-4">Stabilité et Fiabilité</h3>
+                        <p class="text-sm md:text-base">Profitez d'un
+                            streaming sans coupure grâce à notre infrastructure robuste.</p>
+                    </div>
+                    <div class="bg-premium p-6 md:p-8 rounded-xl hover-scale flex flex-col items-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-10 w-10 md:h-12 md:w-12 mb-4 md:mb-6 text-blue-400" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 3h.01M6 6h.01M18 6h.01M6 10h.01M18 10h.01M6 14h.01M18 14h.01M6 18h.01M18 18h.01M12 21a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-4">Support Réactif</h3>
+                        <p class="text-sm md:text-base">Notre équipe
+                            est disponible pour vous assister rapidement en cas de besoin.</p>
+                    </div>
+                    <div class="bg-premium p-6 md:p-8 rounded-xl hover-scale flex flex-col items-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-10 w-10 md:h-12 md:w-12 mb-4 md:mb-6 text-blue-400" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2 md:mb-4">Contenu Diversifié</h3>
+                        <p class="text-sm md:text-base">Des milliers
+                            de chaînes et VOD pour tous les goûts, du sport aux films.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing py-10 md:py-20 bg-premium text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 md:mb-16 text-center gradient-text2">Nos Offres IPTV</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-black p-6 md:p-8 rounded-xl hover-scale flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Forfait Découverte</h3>
+                        <p class="text-3xl md:text-4xl font-bold mb-4 md:mb-6">2.000 F CFA<span
+                                class="text-base md:text-lg font-normal">/mois</span></p>
+                        <ul class="mb-6 md:mb-8 text-sm md:text-base flex-grow">
+                            <li class="mb-2">Accès à une sélection de
+                                chaînes</li>
+                            <li class="mb-2">Qualité Standard
+                                (SD)</li>
+                            <li>Idéal pour un usage occasionnel</li>
+                            <li>1 connexion simultanée</li>
+                        </ul>
+                        <a href="#"
+                            class="btn-primary text-white font-bold py-2 px-4 rounded-full block text-center bg-blue-500 hover:bg-blue-600 transition">Souscrire</a>
+                    </div>
+                    <div class="bg-black p-6 md:p-8 rounded-xl hover-scale glow flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Forfait Essentiel</h3>
+                        <p class="text-3xl md:text-4xl font-bold mb-4 md:mb-6">5.000 F CFA<span
+                                class="text-base md:text-lg font-normal">/mois</span></p>
+                        <ul class="mb-6 md:mb-8 text-sm md:text-base flex-grow">
+                            <li class="mb-2">Plus de 5000+ chaînes en
+                                direct</li>
+                            <li class="mb-2">Catalogue VOD
+                                basique</li>
+                            <li class="mb-2">HD inclus</li>
+                            <li>2 connexions simultanées</li>
+                        </ul>
+                        <a href="#"
+                            class="btn-primary text-white font-bold py-2 px-4 rounded-full block text-center bg-blue-500 hover:bg-blue-600 transition">Souscrire</a>
+                    </div>
+                    <div class="bg-black p-6 md:p-8 rounded-xl hover-scale flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Forfait Premium</h3>
+                        <p class="text-3xl md:text-4xl font-bold mb-4 md:mb-6">10.000 F CFA<span class="text-base md:text-lg 
+                        font-normal">/mois</span></p>
+                        <ul class="mb-6 md:mb-8 text-sm md:text-base flex-grow">
+                            <li class="mb-2">10000+ chaînes en
+                                direct</li>
+                            <li class="mb-2">Catalogue VOD étendu</li>
+                            <li class="mb-2">HD et 4K inclus</li>
+                            <li>Jusqu'à 4 connexions simultanées</li>
+                        </ul>
+                        <a href="#" class="btn-primary text-white font-bold py-2 px-4 rounded-full block text-center bg-blue-500 
+                        hover:bg-blue-600 transition">Souscrire</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="channels" class="py-10 md:py-20 text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 md:mb-16 text-center gradient-text">Aperçu de Nos Chaînes
+                </h2>
+                <div class="channel-carousel">
+                    <div class="channel-preview p-2 md:p-4 rounded-xl">
+                        <img src="https://variety.com/wp-content/uploads/2016/04/canal-plus.jpg?w=1000&h=563&crop=1"
+                            alt="Canal+ Logo" class="img rounded-lg mb-2">
+                        <p class="text-center text-gray-400 text-sm md:text-base">CANAL+</p>
+                    </div>
+                    <div class="channel-preview p-2 md:p-4 rounded-xl">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.U_OvNbJpdN7SVem0DptGjQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"
+                            alt="Sport TV Logo" class="img rounded-lg mb-2">
+                        <p class="text-center text-gray-400 text-sm md:text-base">Sport TV</p>
+                    </div>
+                    <div class="channel-preview p-2 md:p-4 rounded-xl">
+                        <img src="https://th.bing.com/th/id/OIP.xYbikyYhxb00yqp0z7hpigHaCa?w=346&h=114&c=7&r=0&o=7&pid=1.7&rm=3"
+                            alt="M Movies Logo" class="img rounded-lg mb-2">
+                        <p class="text-center text-gray-400 text-sm md:text-base">M Movies</p>
+                    </div>
+                    <div class="channel-preview p-2 md:p-4 rounded-xl">
+                        <img src="https://wpuploads.appadvice.com/wp-content/uploads/2015/06/natgeo.jpg"
+                            alt="National Geo Logo" class="rounded-lg mb-2">
+                        <p class="text-center text-gray-400 text-sm md:text-base">National Geo</p>
+                    </div>
+                    <div class="channel-preview p-2 md:p-4 rounded-xl">
+                        <img src="https://www.senenews.com/wp-content/uploads/2023/11/rts-1-600x314-watermarked.jpg"
+                            alt="RTS 1 Logo" class="img rounded-lg mb-2">
+                        <p class="text-center text-gray-400 text-sm md:text-base">RTS 1</p>
+                    </div>
+                    <div class="channel-preview p-2 md:p-4 rounded-xl">
+                        <img src="https://tvendirect.net/wp-content/uploads/2023/04/Africa-24.png" alt="Africa 24 Logo"
+                            class="img rounded-lg mb-2">
+                        <p class="text-center text-gray-400 text-sm md:text-base">Africa 24</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials py-10 md:py-20 bg-premium text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 md:mb-16 text-center gradient-text2">Ce que disent nos
+                    clients</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-black p-6 md:p-8 rounded-xl">
+                        <p class="mb-3 md:mb-4 text-sm md:text-base">"L'IPTV d'I-tech Sarl est d'une qualité inégalée !
+                            Plus
+                            de coupures, un vrai plaisir de regarder mes émissions."</p>
+                        <p class="font-semibold text-sm md:text-base">- Jean M.</p>
+                    </div>
+                    <div class="bg-black p-6 md:p-8 rounded-xl">
+                        <p class="mb-3 md:mb-4 text-sm md:text-base">"Le processus d'abonnement est super simple et le
+                            paiement par Orange Money, c'est très pratique. Bravo I-tech !"</p>
+                        <p class="font-semibold text-sm md:text-base">- Fatoumata K.</p>
+                    </div>
+                    <div class="bg-black p-6 md:p-8 rounded-xl">
+                        <p class="mb-3 md:mb-4 text-sm md:text-base">"J'ai enfin trouvé un service IPTV fiable au
+                            Cameroun.
+                            Le support client est toujours là pour aider. Je recommande vivement
+                            !"</p>
+                        <p class="font-semibold text-sm md:text-base">- David N.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq py-10 md:py-20 text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 md:mb-16 text-center gradient-text">Foire Aux Questions
+                </h2>
+                <div class="max-w-3xl mx-auto bg-black rounded-xl shadow-2xl overflow-hidden">
+                    <div class="faq-item">
+                        <div class="faq-question font-semibold text-base md:text-lg">Qu'est-ce que l'IPTV I-tech Sarl ?
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-gray-300 text-sm md:text-base">I-tech Sarl IPTV est un service de télévision
+                                par
+                                protocole Internet qui vous permet de regarder des milliers de chaînes
+                                en direct, des films et des séries via votre connexion internet, sans
+                                antenne parabolique. Nous offrons une large gamme de contenus pour
+                                tous les âges et tous les goûts.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question font-semibold text-base md:text-lg">Comment s'effectue le paiement
+                            mobile ?</div>
+                        <div class="faq-answer">
+                            <p class="text-gray-300 text-sm md:text-base">Nous acceptons les paiements via Orange Money
+                                et MoMo.
+                                Lorsque vous choisissez votre offre et validez, vous serez invité à
+                                sélectionner votre mode de paiement. Une notification vous sera
+                                envoyée sur votre téléphone pour confirmer la transaction en entrant
+                                votre code PIN/mot de passe. La somme est ensuite directement
+                                transférée sur le compte de l'entreprise.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question font-semibold text-base md:text-lg">Quels sont les prérequis techniques
+                            ?</div>
+                        <div class="faq-answer">
+                            <p class="text-gray-300 text-sm md:text-base">Pour profiter pleinement de nos services, vous
+                                aurez
+                                besoin d'une connexion internet stable (un minimum de 10 Mbps est
+                                recommandé pour la HD) et d'un appareil compatible (Smart TV, box
+                                Android TV, smartphone, tablette, ordinateur).</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question font-semibold text-base md:text-lg">Puis-je tester le service avant de
+                            m'abonner
+                            ?</div>
+                        <div class="faq-answer">
+                            <p class="text-gray-300 text-sm md:text-base">Oui, nous proposons des périodes d'essai ou
+                                des forfaits
+                                découverte pour vous permettre de tester la qualité de notre service.
+                                Contactez notre support client pour plus d'informations à ce
+                                sujet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-10 text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-4">I-tech Sarl IPTV</h3>
+                    <p class="text-sm md:text-base text-gray-400">Votre partenaire pour une expérience TV de qualité
+                        supérieure.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-4">Liens rapides</h3>
+                    <ul>
+                        <li><a href="#"
+                                class="text-sm md:text-base text-gray-400 hover:text-blue-400 transition duration-300">Accueil</a>
+                        </li>
+                        <li><a href="#features"
+                                class="text-sm md:text-base text-gray-400 hover:text-blue-400 transition duration-300">Fonctionnalités</a>
+                        </li>
+                        <li><a href="#pricing"
+                                class="text-sm md:text-base text-gray-400 hover:text-blue-400 transition duration-300">Nos
+                                Offres</a></li>
+                        <li><a href="#faq"
+                                class="text-sm md:text-base text-gray-400 hover:text-blue-400 transition duration-300">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-4">Nous contacter</h3>
+                    <p class="text-sm md:text-base text-gray-400">Email: contact@itech-sarl.cm</p>
+                    <p class="text-sm md:text-base text-gray-400">Téléphone: +237 XXXX XXXX</p>
+                </div>
+                <div>
+                    <h3 class="text-lg md:text-xl font-semibold mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-blue-400 transition duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 
+                                 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-blue-400 transition duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 018.901 2.013c.636-.247 1.363-.416 2.427-.465C11.685 2.013 11.95 2 12.315 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.399-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-1.858.344-.466.182-.8-.398-1.15-.748-.35-.35-.566-.683-.748-1.15.137-.353-.058-1.351-.058-3.807v-.468c0-2.456-.011-2.784-.058-3.807-.045-.975-.207-1.504-.344-1.857-.182-.467-.399-.8-.748-1.15-.35-.35-.683-.566-1.15-.748-.353-.137-.882-.3-1.857-.344C14.166 2.013 13.837 2 11.685 2h.63z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-gray-400 mt-6 md:mt-10">
+                <p>© 2025 I-tech Sarl IPTV. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize Slick Carousel for channels 
+            $('.channel-carousel').slick({
+                infinite: true,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1000,
+                arrows: false,
+                dots: false,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+            // FAQ Toggle 
+            $('.faq-question').on('click', function () {
+                $(this).parent().toggleClass('active');
+                $(this).next('.faq-answer').slideToggle(300);
+            });
+        }); 
+    </script>
+</body>
+
+</html>

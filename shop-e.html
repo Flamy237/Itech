@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>I-tech Sarl IPTV | Boutique d'Abonnements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue),
+                    var(--primary-blue));
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            text-align: center;
+            display: inline-block;
+            font-weight: 700;
+            color: var(--text-light);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-blue),
+                    var(--accent-blue));
+            transform: translateY(-2px);
+        }
+
+        .filter-button {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background-color: var(--accent-blue);
+        }
+
+        .product-card {
+            background-color: var(--secondary-blue);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fade-in-up {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fade-in-up 0.6s ease-out forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #00C6FF, #0072FF);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-premium {
+            background: linear-gradient(135deg, #1A202C, #2D3748);
+            color: #fff;
+        }
+
+        .form-section-custom {
+            padding: 4rem 0;
+            background-color: #1A202C;
+            color: #fff;
+        }
+
+        .container-custom {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .form-content {
+            background-color: #2D3748;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .offer-summary {
+            background-color: #4A5568;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .offer-summary-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .offer-detail {
+            font-weight: 700;
+            color: #63B3ED;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            color: #fff;
+        }
+
+        .input-group-custom {
+            margin-bottom: 1rem;
+        }
+
+        .input-group-custom input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #4A5568;
+            background-color: #2D3748;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group-custom input::placeholder {
+            color: #CBD5E0;
+        }
+
+        .input-group-custom input:focus {
+            border-color: #63B3ED;
+        }
+
+        .payment-method-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .radio-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            background-color: #4A5568;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            color: #fff;
+        }
+
+        .radio-label:has(input:checked) {
+            background-color: #63B3ED;
+        }
+
+        .radio-label input {
+            margin-right: 0.5rem;
+            accent-color: #3B82F6;
+        }
+
+        .form-submit-btn,
+        .form-cancel-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .form-submit-btn {
+            background-color: #3B82F6;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .form-submit-btn:hover {
+            background-color: #2563EB;
+        }
+
+        .form-cancel-btn {
+            background-color: #718096;
+            color: #fff;
+        }
+
+        .form-cancel-btn:hover {
+            background-color: #4A5568;
+        }
+    </style>
+</head>
+
+<body class="antialiased flex flex-col min-h-screen">
+    <header class="bg-white shadow-md z-50 lg:fixed lg:top-0 lg:left-0 relative">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <img src="https://itechservices.cm/assets/images/logos/ITECH-PNG.png" class="h-10"
+                alt="LOGO I-tech Services">
+            <!-- Hamburger Button -->
+            <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="./index.html#features" class="text-gray-600 hover:text-blue-400 transition">Fonctionnalités</a>
+                <a href="./index.html#pricing" class="text-gray-600 hover:text-blue-400 transition">Nos Offres</a>
+                <a href="./index.html#channels" class="text-gray-600 hover:text-blue-400 transition">Aperçu Chaînes</a>
+                <a href="./index.html#faq" class="text-gray-600 hover:text-blue-400 transition">FAQ</a>
+                <button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow hover:from-blue-600 
+                    hover:to-indigo-700 transition">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Shop</span>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Side Nav -->
+        <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out 
+            md:hidden z-50 p-6 flex flex-col space-y-6">
+            <button id="close-menu" class="self-end text-gray-600 text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <a href="./index.html#features" class="text-gray-700 hover:text-blue-500">Fonctionnalités</a>
+            <a href="./index.html#pricing" class="text-gray-700 hover:text-blue-500">Nos Offres</a>
+            <a href="./index.html#channels" class="text-gray-700 hover:text-blue-500">Aperçu Chaînes</a>
+            <a href="./index.html#faq" class="text-gray-700 hover:text-blue-500">FAQ</a>
+            <button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow hover:from-blue-600 
+              hover:to-indigo-700 transition">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Shop</span>
+            </button>
+        </div>
+        <!-- JS for toggling -->
+        <script>
+            const toggleBtn = document.getElementById('menu-toggle');
+            const closeBtn = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            toggleBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            closeBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        </script>
+    </header>
+    <main class="flex-grow py-0">
+        <section id="shop-hero"
+            class="bg-premium text-white py-10 min-h-screen flex items-center justify-center text-center px-4">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Notre Boutique d'Abonnements IPTV</h1>
+                <p class="text-lg md:text-xl">Choisissez l'abonnement parfait pour votre divertissement illimité.</p>
+            </div>
+        </section>
+
+        <section id="shop-content" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="mb-10 max-w-2xl mx-auto">
+                    <input type="text" id="search-input" placeholder="Rechercher un abonnement..."
+                        class="w-full p-4
+                      rounded-full bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-blue-500 transition duration-300" />
+                </div>
+                <div class="mb-12 flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
+                    <span class="text-lg font-semibold">Filtrer par
+                        :</span>
+                    <div class="flex flex-wrap justify-center gap-2" id="filter-container">
+                        <button class="filter-button active" data-filter="all">Tout</button>
+                        <button class="filter-button" data-filter="1-month">1 Mois</button>
+                        <button class="filter-button" data-filter="3-months">3 Mois</button>
+                        <button class="filter-button" data-filter="6-months">6 Mois</button>
+                        <button class="filter-button" data-filter="12-months">12 Mois</button>
+                        <button class="filter-button" data-filter="1-device">Standard</button>
+                        <button class="filter-button" data-filter="2-devices">Decouverte</button>
+                        <button class="filter-button" data-filter="4-devices">Premium</button>
+                    </div>
+                </div>
+            </div>
+            <div id="subscription-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto  px-4">
+                <!-- Carte d'abonnement -->
+                <div class="product-card bg-gray-800 rounded  p-4 w-full sm:w-72 md:w-64 fade-in-up text-center">
+                    <!-- Image réduite -->
+                    <img src="./abonnement-1mois-1appareil.png" alt="Abonnement IPTV"
+                        class="w-28 h-28 object-cover rounded mx-auto mb-3">
+
+                    <!-- Infos principales -->
+                    <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 1 Mois</h3>
+                    <p class="text-blue-400 text-sm mb-1">Standard</p>
+                    <p class="text-xl font-bold text-white mb-2">$6 <span class="text-sm text-gray-400">/mois</span></p>
+
+                    <!-- Bouton pour afficher les détails -->
+                    <button
+                        class="toggle-details-btn bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto transition mb-2">+</button>
+
+                    <!-- Détails cachés -->
+                    <div class="details hidden text-left text-gray-300 text-sm space-y-2 mt-2">
+                        <ul class="list-disc list-inside">
+                            <li>+1000 Chaînes en direct</li>
+                            <li>VOD incluse (Films & Séries)</li>
+                            <li>Qualité HD</li>
+                            <li>Support 24/7</li>
+                        </ul>
+                        <a href="#" class="btn-primary mt-3 inline-block">Acheter Maintenant</a>
+                    </div>
+                </div>
+
+
+
+
+
+                <script>
+                    document.querySelectorAll('.toggle-details-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const details = button.nextElementSibling;
+                            details.classList.toggle('hidden');
+                        });
+                    });
+                </script>
+ 
+
+
+
+                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="3-months"
+                    data-devices="2-devices" data-price="20" style="animation-delay: 0.2s">
+                    <img src="./abonnement-3mois-2appareil.png" alt="Abonnement IPTV" class="mb-4">
+                    <h3 class="text-2xl font-semibold mb-2">Abonnement
+                        IPTV 3 Mois</h3>
+                    <p class="text-blue-300 text-lg mb-2">
+                        Decouverte</p>
+                    <p class="text-4xl font-bold mb-4">$ 20 </p>
+                    <span class="text-lg font-normal"></span>
+                    <ul class="text-gray-300 text-left mb-6 flex-grow">
+                        <li class="mb-1"> +10000 Chaînes en
+                            direct</li>
+                        <li class="mb-1"> VOD étendue (Films &
+                            Séries)</li>
+                        <li class="mb-1"> Qualité HD/Full HD/4K</li>
+                        <li class="mb-1"> Support Prioritaire</li>
+                    </ul>
+                    <a href="#" class="btn-primary mt-auto">Acheter
+                        Maintenant</a>
+                </div>
+                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="6-months"
+                    data-devices="2-devices" data-price="50" style="animation-delay: 0.3s">
+                    <img src="./abonnement-6mois-2appareils.png" alt="Abonnement IPTV" class="mb-4">
+                    <h3 class="text-2xl font-semibold mb-2">Abonnement
+                        IPTV 6 Mois</h3>
+                    <p class="text-blue-300 text-lg mb-2">
+                        Decouverte</p>
+                    <p class="text-4xl font-bold mb-4"> $ 50 </p>
+                    <span class="text-lg font-normal"></span>
+                    <ul class="text-gray-300 text-left mb-6 flex-grow">
+                        <li class="mb-1"> +10000 Chaînes en
+                            direct</li>
+                        <li class="mb-1"> VOD étendue (Films &
+                            Séries)</li>
+                        <li class="mb-1"> Qualité HD/Full HD</li>
+                        <li class="mb-1"> Support Prioritaire</li>
+                    </ul>
+                    <a href="#" class="btn-primary mt-auto">Acheter
+                        Maintenant</a>
+                </div>
+                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="12-months"
+                    data-devices="4-devices" data-price="90" style="animation-delay: 0.4s">
+                    <img src="./abonnement-12mois-2appareils.png" alt="Abonnement IPTV" class="mb-4">
+                    <h3 class="text-2xl font-semibold mb-2">Abonnement
+                        IPTV 12 Mois</h3>
+                    <p class="text-blue-300 text-lg mb-2">Premium</p>
+                    <p class="text-4xl font-bold mb-4"> $ 90 <span class="text-lg font-normal">/ans</span></p>
+                    <ul class="text-gray-300 text-left mb-6 flex-grow">
+                        <li class="mb-1"> Accès Ultime (+21000
+                            Chaînes)</li>
+                        <li class="mb-1"> Catalogue VOD Premium</li>
+                        <li class="mb-1"> Qualité HD/Full HD/4K
+                            Max</li>
+                        <li class="mb-1"> Support VIP 24/7</li>
+                    </ul>
+                    <a href="#" class="btn-primary mt-auto">Acheter
+                        Maintenant</a>
+                </div>
+                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="1-month"
+                    data-devices="2-devices" data-price="8" style="animation-delay: 0.5s">
+                    <div class="image-container">
+                        <img src="./abonnement-1mois-2appareils.png" alt="Abonnement IPTV" class="mb-4">
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Abonnement
+                        IPTV 1 Mois</h3>
+                    <p class="text-blue-300 text-lg mb-2">
+                        Decouverte</p>
+                    <p class="text-4xl font-bold mb-4">$ 8 </p>
+                    <span class="text-lg font-normal">/mois</span>
+                    <ul class="text-gray-300 text-left mb-6 flex-grow">
+                        <li class="mb-1"> +1000 Chaînes en direct</li>
+                        <li class="mb-1"> VOD incluse (Films &
+                            Séries)</li>
+                        <li class="mb-1"> Qualité HD/Full HD</li>
+                        <li class="mb-1"> Support 24/7</li>
+                    </ul>
+                    <a href="#" class="btn-primary mt-auto">Acheter
+                        Maintenant</a>
+                </div>
+                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="3-months"
+                    data-devices="1-device" data-price="18" style="animation-delay: 0.6s">
+                    <img src="./abonnement-3mois-1appareil.png" alt="Abonnement IPTV" class="mb-4">
+                    <h3 class="text-2xl font-semibold mb-2">Abonnement
+                        IPTV 3 Mois</h3>
+                    <p class="text-blue-300 text-lg mb-2">1
+                        Appareil</p>
+                    <p class="text-4xl font-bold mb-4">$ 18 </p>
+                    <span class="text-lg font-normal"></span>
+                    <ul class="text-gray-300 text-left mb-6 flex-grow">
+                        <li class="mb-1"> +10000 Chaînes en
+                            direct</li>
+                        <li class="mb-1"> VOD étendue (Films
+                            Séries)</li>
+                        <li class="mb-1"> Qualité HD/Full HD</li>
+                        <li class="mb-1"> Support Prioritaire</li>
+                    </ul>
+                    <a href="#" class="btn-primary mt-auto">Acheter
+                        Maintenant</a>
+                </div>
+            </div>
+
+            <script>
+                function toggleDetails(button) {
+                    const card = button.closest('.product-card');
+                    const details = card.querySelector('.product-details');
+                    details.classList.toggle('hidden');
+                }
+            </script>
+
+
+        </section>
+        <section id="subscription-form-section" class="form-section-custom hidden">
+            <div class="container-custom">
+                <div class="form-content">
+                    <h2 class="form-title">Complétez votre
+                        Abonnement</h2>
+                    <div class="offer-summary">
+                        <h3 class="offer-summary-title">Votre Offre
+                            Choisie :</h3>
+                        <p>Nom de l'offre: <span id="form-offer-name" class="offer-detail"></span></p>
+                        <p>Durée: <span id="form-offer-duration" class="offer-detail"></span></p>
+                        <p>Pack <span id="form-offer-devices" class="offer-detail"></span></p>
+                        <p class="total-amount">Montant Total: <span id="form-offer-price"></span> $</p>
+                        <input type="hidden" id="hidden-offer-name" name="offer_name">
+                        <input type="hidden" id="hidden-offer-duration" name="offer_duration">
+                        <input type="hidden" id="hidden-offer-devices" name="offer_devices">
+                        <input type="hidden" id="hidden-offer-price" name="offer_price">
+                    </div>
+                    <form id="subscription-form" action="#" method="POST">
+                        <div class="input-group-custom">
+                            <input type="text" id="nom" name="nom" required placeholder="Nom">
+                        </div>
+                        <div class="input-group-custom">
+                            <input type="text" id="prenom" name="prenom" required placeholder="Prénom">
+                        </div>
+                        <div class="input-group-custom">
+                            <input type="email" id="email" name="email" required placeholder="E-mail">
+                        </div>
+                        <div class="input-group-custom">
+                            <input type="tel" id="numero_telephone" name="numero_telephone" required
+                                placeholder="Numéro de Téléphone (WhatsApp)">
+                        </div>
+                        <div class="payment-method-group">
+                            <label class="payment-method-label">Mode
+                                de Paiement:</label>
+                            <div class="radio-options">
+                                <label class="radio-label">
+                                    <input type="radio" name="mode_paiement" value="Orange Money" required>
+                                    <span>Orange Money</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="mode_paiement" value="MoMo">
+                                    <span>MoMo (Mobile Money
+                                        MTN)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="form-submit-btn">Procéder au Paiement</button>
+                        <button type="button" id="cancel-subscription" class="form-cancel-btn">Annuler</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-black text-white py-10 w-full">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">I-tech Sarl
+                        IPTV</h3>
+                    <p class="text-gray-400">Votre partenaire pour une
+                        expérience TV de qualité supérieure.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Liens
+                        rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./index.html" class="hover:text-blue-400 transition">Accueil</a></li>
+                        <li><a href="./index.html#features" class="hover:text-blue-400 transition">Fonctionnalités</a>
+                        </li>
+                        <li><a href="./index.html#pricing" class="hover:text-blue-400 transition">Nos Offres</a></li>
+                        <li><a href="./index.html#faq" class="hover:text-blue-400 transition">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Nous
+                        contacter</h3>
+                    <p class="text-gray-400">Email:
+                        contact@itech-sarl.cm</p>
+                    <p class="text-gray-400">Téléphone: +237 XXXX
+                        XXXX</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Suivez-nous</h3>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="hover:text-blue-400 transition">
+                            <i class="fa-brands fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition">
+                            <i class="fa-brands fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-gray-500 text-sm mt-8">
+                <p>© 2025 I-tech Sarl IPTV. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function filterSubscriptions() {
+                const searchText =
+                    $('#search-input').val().toLowerCase();
+                const activeFilter =
+                    $('.filter-button.active').data('filter');
+                $('.product-card').each(function () {
+                    const card = $(this);
+                    const title =
+                        card.find('h3').text().toLowerCase();
+                    const duration = card.data('duration');
+                    const devices = card.data('devices');
+                    const matchesSearch = title.includes(searchText);
+                    let matchesFilter = false;
+                    if (activeFilter === 'all') {
+                        matchesFilter = true;
+                    } else if (activeFilter === duration) {
+                        matchesFilter = true;
+                    } else if (activeFilter === devices) {
+                        matchesFilter = true;
+                    }
+                    if (matchesSearch && matchesFilter) {
+                        card.show();
+                    } else {
+                        card.hide();
+                    }
+                });
+            }
+            $('#search-input').on('keyup', function () {
+                filterSubscriptions();
+            });
+            $('.filter-button').on('click', function () {
+                $('.filter-button').removeClass('active');
+                $(this).addClass('active');
+                filterSubscriptions();
+            });
+            filterSubscriptions();
+        });
+        const subscriptionFormSection =
+            $('#subscription-form-section');
+        const shopContentSection = $('#shop-content');
+        $('.btn-primary').on('click', function (e) {
+            e.preventDefault();
+            const card = $(this).closest('.product-card');
+            const offerName = card.find('h3').text().trim();
+            const offerDuration = card.data('duration');
+            const offerDevices = card.data('devices');
+            const offerPrice = card.data('price');
+            $('#form-offer-name').text(offerName);
+            $('#form-offer-duration').text(mapDurationToText(offerDuration));
+            $('#form-offer-devices').text(mapDevicesToText(offerDevices));
+            $('#form-offer-price').text(offerPrice);
+            $('#hidden-offer-name').val(offerName);
+            $('#hidden-offer-duration').val(offerDuration);
+            $('#hidden-offer-devices').val(offerDevices);
+            $('#hidden-offer-price').val(offerPrice);
+            shopContentSection.addClass('hidden');
+            subscriptionFormSection.removeClass('hidden');
+            $('html, body').animate({
+                scrollTop: subscriptionFormSection.offset().top -
+                    $('header').outerHeight()
+            }, 500);
+        });
+        $('#cancel-subscription').on('click', function () {
+            subscriptionFormSection.addClass('hidden');
+            shopContentSection.removeClass('hidden');
+            $('#subscription-form')[0].reset();
+            $('html, body').animate({
+                scrollTop: shopContentSection.offset().top -
+                    $('header').outerHeight()
+            }, 500);
+        });
+        function mapDurationToText(duration) {
+            const durations = {
+                '1-month': '1 Mois',
+                '3-months': '3 Mois',
+                '6-months': '6 Mois',
+                '12-months': '12 Mois'
+            };
+            return durations[duration] || duration;
+        }
+        function mapDevicesToText(devices) {
+            const devicesMap = {
+                '1-device': ' Standard',
+                '2-devices': 'Decouverte',
+                '4-devices': 'Premium'
+            };
+            return devicesMap[devices] || devices;
+        }
+        $('#subscription-form').on('submit', function (e) {
+            e.preventDefault();
+            const formData = {
+                offer_name: $('#hidden-offer-name').val(),
+                offer_duration: $('#hidden-offer-duration').val(),
+                offer_devices: $('#hidden-offer-devices').val(),
+                offer_price: $('#hidden-offer-price').val(),
+                nom: $('#nom').val(),
+                prenom: $('#prenom').val(),
+                email: $('#email').val(),
+                numero_telephone: $('#numero_telephone').val(),
+                mode_paiement:
+                    $('input[name="mode_paiement"]:checked').val()
+            };
+            console.log("Données prêtes à être envoyées :", formData);
+            alert("Formulaire soumis ! (Simulation d'envoi)");
+            subscriptionFormSection.addClass('hidden');
+            shopContentSection.removeClass('hidden');
+            $('#subscription-form')[0].reset();
+        });
+    </script>
+</body>
+
+</html>
