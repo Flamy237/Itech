@@ -47,7 +47,9 @@
         .product-card {
             background-color: var(--secondary-blue);
             border-radius: 1rem;
-            padding: 1.5rem;
+            padding: 0.75rem;
+            /* padding-left: 1.5rem;
+            padding-right: 1.5rem; */
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -56,11 +58,48 @@
         }
 
         .product-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+            width: 17rem;
+            /*w-18 */
+            height: 17rem !important;
+            /* h-18 */
+            margin-bottom: 0.5rem !important;
+        }
+
+        .product-card h3,
+        .product-card p,
+        .product-card button {
+            /* align-items: center;
+            text-align: center; */
+            margin-bottom: 0.25rem !important;
+        }
+
+        .product-card .details {
+            margin-top: 0.5rem !important;
+            /* Réduire l'espacement vertical */
+            --tw-space-y-reverse: 0;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .product-card .details ul li {
+            margin-bottom: 0.25rem !important;
+        }
+
+        @media screen and (max-width: 640px) {
+            .product-card {
+                width: 21rem;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .product-card img {
+                width: 100%;
+                height: auto;
+            }
+
+            .product-card {
+                padding: 1rem;
+            }
+
         }
 
         @keyframes fade-in-up {
@@ -83,6 +122,14 @@
         .gradient-text {
             background: linear-gradient(to right, #00C6FF, #0072FF);
             background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-2 {
+            background: white;
+            background-clip: text;
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -292,10 +339,10 @@
     </header>
     <main class="flex-grow py-0">
         <section id="shop-hero"
-            class="bg-premium text-white py-10 min-h-screen flex items-center justify-center text-center px-4">
+            class="bg-premium py-10 min-h-screen flex items-center justify-center text-center px-4">
             <div class="max-w-3xl">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Notre Boutique d'Abonnements IPTV</h1>
-                <p class="text-lg md:text-xl">Choisissez l'abonnement parfait pour votre divertissement illimité.</p>
+                <p class="md:text-xl font-awesome gradient-text-2">Choisissez l'abonnement parfait pour votre divertissement illimité.</p>
             </div>
         </section>
 
@@ -321,12 +368,13 @@
                     </div>
                 </div>
             </div>
-            <div id="subscription-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto  px-4">
+            <div id="subscription-grid"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto  sm:px-32 text-center">
                 <!-- Carte d'abonnement -->
-                <div class="product-card rounded p-4 w-full sm:w-72 md:w-64 fade-in-up text-center">
+                <div class="product-card  sm:w-72 md:w-2000 fade-in-up text-center" data-price="6" data-duration="1-month" data-devices="Standard">
                     <!-- Image réduite -->
-                    <img src="./abonnement-1mois-1appareil.png" alt="Abonnement IPTV"
-                        class="w-28 h-28 object-cover rounded mx-auto mb-3">
+                    <img src="./img/Abonnement-1mois-standard.jpg" alt="Abonnement IPTV"
+                        class="object-cover rounded mx-auto mb-1">
 
                     <!-- Infos principales -->
                     <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 1 Mois</h3>
@@ -345,134 +393,141 @@
                             <li>Qualité HD</li>
                             <li>Support 24/7</li>
                         </ul>
-                        <a href="#" class="btn-primary mt-3 inline-block">Acheter Maintenant</a>
+                        <a href="https://selar.com/61113m10e3" class="btn-primary mt-3 inline-block">Acheter Maintenant</a>
                     </div>
                 </div>
 
 
 
-
-
-                <script>
-                    document.querySelectorAll('.toggle-details-btn').forEach(button => {
-                        button.addEventListener('click', () => {
-                            const details = button.nextElementSibling;
-                            details.classList.toggle('hidden');
-                        });
-                    });
-                </script>
- 
-
-
-
-                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="3-months"
+                <!-- Carte d'abonnement 3 mois Decouverte -->
+                <div class="product-card sm:w-72 md:w-2000 fade-in-up text-center" data-duration="3-months"
                     data-devices="2-devices" data-price="20" style="animation-delay: 0.2s">
-                    <img src="./abonnement-3mois-2appareil.png" alt="Abonnement IPTV" class="mb-4">
-                    <h3 class="text-2xl font-semibold mb-2">Abonnement
-                        IPTV 3 Mois</h3>
-                    <p class="text-blue-300 text-lg mb-2">
-                        Decouverte</p>
-                    <p class="text-4xl font-bold mb-4">$ 20 </p>
-                    <span class="text-lg font-normal"></span>
-                    <ul class="text-gray-300 text-left mb-6 flex-grow">
-                        <li class="mb-1"> +10000 Chaînes en
-                            direct</li>
-                        <li class="mb-1"> VOD étendue (Films &
-                            Séries)</li>
-                        <li class="mb-1"> Qualité HD/Full HD/4K</li>
-                        <li class="mb-1"> Support Prioritaire</li>
-                    </ul>
-                    <a href="#" class="btn-primary mt-auto">Acheter
-                        Maintenant</a>
-                </div>
-                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="6-months"
-                    data-devices="2-devices" data-price="50" style="animation-delay: 0.3s">
-                    <img src="./abonnement-6mois-2appareils.png" alt="Abonnement IPTV" class="mb-4">
-                    <h3 class="text-2xl font-semibold mb-2">Abonnement
-                        IPTV 6 Mois</h3>
-                    <p class="text-blue-300 text-lg mb-2">
-                        Decouverte</p>
-                    <p class="text-4xl font-bold mb-4"> $ 50 </p>
-                    <span class="text-lg font-normal"></span>
-                    <ul class="text-gray-300 text-left mb-6 flex-grow">
-                        <li class="mb-1"> +10000 Chaînes en
-                            direct</li>
-                        <li class="mb-1"> VOD étendue (Films &
-                            Séries)</li>
-                        <li class="mb-1"> Qualité HD/Full HD</li>
-                        <li class="mb-1"> Support Prioritaire</li>
-                    </ul>
-                    <a href="#" class="btn-primary mt-auto">Acheter
-                        Maintenant</a>
-                </div>
-                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="12-months"
-                    data-devices="4-devices" data-price="90" style="animation-delay: 0.4s">
-                    <img src="./abonnement-12mois-2appareils.png" alt="Abonnement IPTV" class="mb-4">
-                    <h3 class="text-2xl font-semibold mb-2">Abonnement
-                        IPTV 12 Mois</h3>
-                    <p class="text-blue-300 text-lg mb-2">Premium</p>
-                    <p class="text-4xl font-bold mb-4"> $ 90 <span class="text-lg font-normal">/ans</span></p>
-                    <ul class="text-gray-300 text-left mb-6 flex-grow">
-                        <li class="mb-1"> Accès Ultime (+21000
-                            Chaînes)</li>
-                        <li class="mb-1"> Catalogue VOD Premium</li>
-                        <li class="mb-1"> Qualité HD/Full HD/4K
-                            Max</li>
-                        <li class="mb-1"> Support VIP 24/7</li>
-                    </ul>
-                    <a href="#" class="btn-primary mt-auto">Acheter
-                        Maintenant</a>
-                </div>
-                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="1-month"
-                    data-devices="2-devices" data-price="8" style="animation-delay: 0.5s">
-                    <div class="image-container">
-                        <img src="./abonnement-1mois-2appareils.png" alt="Abonnement IPTV" class="mb-4">
+                    <img src="./img/Abonnement-3mois-decouverte.jpg" alt="Abonnement IPTV"
+                        class="object-cover rounded mx-auto mb-1">
+                    <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 3 Mois</h3>
+                    <p class="text-blue-400 text-sm mb-1">Decouverte</p>
+                    <p class="text-xl font-bold text-white mb-1">$20 <span class="text-sm text-gray-400">/3 mois</span>
+                    </p>
+                    <button
+                        class="toggle-details-btn bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto transition mb-1">+</button>
+                    <div class="details hidden text-left text-gray-300 text-sm space-y-2 mt-2">
+                        <ul class="list-disc list-inside">
+                            <li>+1000 Chaînes en direct</li>
+                            <li>VOD incluse (Films & Séries)</li>
+                            <li>Qualité HD</li>
+                            <li>Support 24/7</li>
+                        </ul>
+                        <a href="https://selar.com/j1s552469w" class="btn-primary mt-3 inline-block">Acheter Maintenant</a>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-2">Abonnement
-                        IPTV 1 Mois</h3>
-                    <p class="text-blue-300 text-lg mb-2">
-                        Decouverte</p>
-                    <p class="text-4xl font-bold mb-4">$ 8 </p>
-                    <span class="text-lg font-normal">/mois</span>
-                    <ul class="text-gray-300 text-left mb-6 flex-grow">
-                        <li class="mb-1"> +1000 Chaînes en direct</li>
-                        <li class="mb-1"> VOD incluse (Films &
-                            Séries)</li>
-                        <li class="mb-1"> Qualité HD/Full HD</li>
-                        <li class="mb-1"> Support 24/7</li>
-                    </ul>
-                    <a href="#" class="btn-primary mt-auto">Acheter
-                        Maintenant</a>
                 </div>
-                <div class="product-card hover-scale flex flex-col h-full fade-in-up" data-duration="3-months"
+
+                <!-- Carte d'abonnement 6 mois Decouverte -->
+                <div class="product-card sm:w-72 md:w-2000 fade-in-up text-center" data-duration="6-months"
+                    data-devices="2-devices" data-price="50" style="animation-delay: 0.3s">
+                    <img src="./img/Abonnement-6mois-decouverte.png" alt="Abonnement IPTV"
+                        class="object-cover rounded mx-auto mb-1">
+                    <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 6 Mois</h3>
+                    <p class="text-blue-400 text-sm mb-1">Decouverte</p>
+                    <p class="text-xl font-bold text-white mb-1">$50 <span class="text-sm text-gray-400">/6 mois</span>
+                    </p>
+                    <button
+                        class="toggle-details-btn bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto transition mb-1">+</button>
+                    <div class="details hidden text-left text-gray-300 text-sm space-y-2 mt-1">
+                        <ul class="list-disc list-inside">
+                            <li>+10000 Chaînes en direct</li>
+                            <li>VOD étendue (Films & Séries)</li>
+                            <li>Qualité HD/Full HD</li>
+                            <li>Support Prioritaire</li>
+                        </ul>
+                        <a href="https://selar.com/543h121511" class="btn-primary mt-2 inline-block">Acheter Maintenant</a>
+                    </div>
+                </div>
+
+                <!-- Carte d'abonnement 12 mois Premium -->
+                <div class="product-card sm:w-72 md:w-2000 fade-in-up text-center" data-duration="12-months"
+                    data-devices="4-devices" data-price="90" style="animation-delay: 0.4s">
+                    <img src="./img/Abonnement-12mois-premium.png" alt="Abonnement IPTV"
+                        class="object-cover rounded mx-auto mb-1">
+                    <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 12 Mois</h3>
+                    <p class="text-blue-400 text-sm mb-1">Premium</p>
+                    <p class="text-xl font-bold text-white mb-1">$90 <span class="text-sm text-gray-400">/an</span></p>
+                    <button
+                        class="toggle-details-btn bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto transition mb-1">+</button>
+                    <div class="details hidden text-left text-gray-300 text-sm space-y-2 mt-1">
+                        <ul class="list-disc list-inside">
+                            <li>Accès Ultime (+21000 Chaînes)</li>
+                            <li>Catalogue VOD Premium</li>
+                            <li>Qualité HD/Full HD/4K Max</li>
+                            <li>Support VIP 24/7</li>
+                        </ul>
+                        <a href="https://selar.com/9606pj5120" class="btn-primary mt-2 inline-block">Acheter Maintenant</a>
+                    </div>
+                </div>
+
+                <!-- Carte d'abonnement 1 mois Decouverte -->
+                <div class="product-card sm:w-72 md:w-2000 fade-in-up text-center" data-duration="1-month"
+                    data-devices="2-devices" data-price="8" style="animation-delay: 0.5s">
+                    <img src="./img/Abonnement-1mois-decouverte.jpg" alt="Abonnement IPTV"
+                        class="object-cover rounded mx-auto mb-1">
+                    <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 1 Mois</h3>
+                    <p class="text-blue-400 text-sm mb-1">Decouverte</p>
+                    <p class="text-xl font-bold text-white mb-1">$8 <span class="text-sm text-gray-400">/mois</span></p>
+                    <button
+                        class="toggle-details-btn bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto transition mb-1">+</button>
+                    <div class="details hidden text-left text-gray-300 text-sm space-y-2 mt-1">
+                        <ul class="list-disc list-inside">
+                            <li>+1000 Chaînes en direct</li>
+                            <li>VOD incluse (Films & Séries)</li>
+                            <li>Qualité HD/Full HD</li>
+                            <li>Support 24/7</li>
+                        </ul>
+                        <a href="https://selar.com/14144nq47m" class="btn-primary mt-2 inline-block">Acheter Maintenant</a>
+                    </div>
+                </div>
+
+                <!-- Carte d'abonnement 3 mois Standard -->
+                <div class="product-card sm:w-72 md:w-2000 fade-in-up text-center" data-duration="3-months"
                     data-devices="1-device" data-price="18" style="animation-delay: 0.6s">
-                    <img src="./abonnement-3mois-1appareil.png" alt="Abonnement IPTV" class="mb-4">
-                    <h3 class="text-2xl font-semibold mb-2">Abonnement
-                        IPTV 3 Mois</h3>
-                    <p class="text-blue-300 text-lg mb-2">1
-                        Appareil</p>
-                    <p class="text-4xl font-bold mb-4">$ 18 </p>
-                    <span class="text-lg font-normal"></span>
-                    <ul class="text-gray-300 text-left mb-6 flex-grow">
-                        <li class="mb-1"> +10000 Chaînes en
-                            direct</li>
-                        <li class="mb-1"> VOD étendue (Films
-                            Séries)</li>
-                        <li class="mb-1"> Qualité HD/Full HD</li>
-                        <li class="mb-1"> Support Prioritaire</li>
-                    </ul>
-                    <a href="#" class="btn-primary mt-auto">Acheter
-                        Maintenant</a>
+                    <img src="./img/Abonnement-3mois-standard.jpg" alt="Abonnement IPTV"
+                        class="object-cover rounded mx-auto mb-1">
+                    <h3 class="text-base font-semibold text-white mb-1">Abonnement IPTV 3 Mois</h3>
+                    <p class="text-blue-400 text-sm mb-1">Standard</p>
+                    <p class="text-xl font-bold text-white mb-1">$18 <span class="text-sm text-gray-400">/3 mois</span>
+                    </p>
+                    <button
+                        class="toggle-details-btn bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto transition mb-1">+</button>
+                    <div class="details hidden text-left text-gray-300 text-sm space-y-2 mt-1">
+                        <ul class="list-disc list-inside">
+                            <li>+10000 Chaînes en direct</li>
+                            <li>VOD étendue (Films & Séries)</li>
+                            <li>Qualité HD/Full HD</li>
+                            <li>Support Prioritaire</li>
+                        </ul>
+                        <a href="https://selar.com/0717955m75" class="btn-primary mt-2 inline-block">Acheter Maintenant</a>
+                    </div>
                 </div>
             </div>
 
             <script>
-                function toggleDetails(button) {
-                    const card = button.closest('.product-card');
-                    const details = card.querySelector('.product-details');
-                    details.classList.toggle('hidden');
-                }
+                const buttons = document.querySelectorAll('.toggle-details-btn');
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const allDetails = document.querySelectorAll('.details');
+
+                        // Masquer tous les autres détails
+                        allDetails.forEach(detail => {
+                            if (detail !== button.nextElementSibling) {
+                                detail.classList.add('hidden');
+                            }
+                        });
+
+                        // Basculer les détails actuels
+                        button.nextElementSibling.classList.toggle('hidden');
+                    });
+                });
             </script>
+
 
 
         </section>
@@ -507,7 +562,7 @@
                             <input type="tel" id="numero_telephone" name="numero_telephone" required
                                 placeholder="Numéro de Téléphone (WhatsApp)">
                         </div>
-                        <div class="payment-method-group">
+                        <!-- <div class="payment-method-group">
                             <label class="payment-method-label">Mode
                                 de Paiement:</label>
                             <div class="radio-options">
@@ -521,8 +576,8 @@
                                         MTN)</span>
                                 </label>
                             </div>
-                        </div>
-                        <button type="submit" class="form-submit-btn">Procéder au Paiement</button>
+                        </div> -->
+                        <button type="submit" class="form-submit-btn">Prochaine étape</button>
                         <button type="button" id="cancel-subscription" class="form-cancel-btn">Annuler</button>
                     </form>
                 </div>
@@ -619,8 +674,8 @@
         });
         const subscriptionFormSection =
             $('#subscription-form-section');
-        const shopContentSection = $('#shop-content');
-        $('.btn-primary').on('click', function (e) {
+        const shopContentSection = $('#shop-content');//modification appliquer ici bas
+        $('.btn-primar').on('click', function (e) {
             e.preventDefault();
             const card = $(this).closest('.product-card');
             const offerName = card.find('h3').text().trim();
