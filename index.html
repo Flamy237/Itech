@@ -76,7 +76,7 @@
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: bold;
             margin-bottom: 20px;
             line-height: 1.2;
@@ -87,6 +87,25 @@
             font-size: 1.1rem;
             margin-bottom: 30px;
             line-height: 1.6;
+        }
+
+         @media screen and (max-width: 750px) {
+            .hero-subtitle {
+                font-size: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            .hero-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 15px;
+                margin-bottom: 1.5rem;
+            }
+            .hero-description {
+                font-size: 0.95rem !important;
+                margin-bottom: 20px !important;
+                padding-left: 14rem !important;
+                padding-right: 14rem !important;
+            }
+            
         }
 
         .hero-button {
@@ -103,6 +122,13 @@
             background-color: #ff0000;
         }
 
+         .hero-logo-hbo {
+            margin-top: 50px;
+            max-width: 150px;
+            opacity: 0.8;
+            /* Légère transparence pour le logo HBO */
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--black-bg);
@@ -111,13 +137,18 @@
         }
 
         /* Styles généraux pour tous les carrousels d'arrière-plan */
+         /* Styles généraux pour tous les carrousels d'arrière-plan */
         .swiper {
             position: absolute;
+            /* Positionne les carrousels par rapport à hero-banner */
             width: 300%;
             height: 33.33%;
+            /* Chaque carrousel prend un tiers de la hauteur de la section hero */
             left: 0;
             z-index: -3;
+            /* Place les carrousels derrière l'overlay et le contenu */
         }
+
 
         /* Positionnement vertical spécifique pour chaque carrousel */
         .banner-slide-1 {
@@ -212,6 +243,7 @@
         .gradient-text2 {
             background: linear-gradient(to right, #dddedf, #adadad, #5b626d);
             background-clip: text;
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -219,6 +251,7 @@
             background: linear-gradient(135deg, var(--accent-blue),
                     var(--primary-blue));
             background-clip: text;
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -249,14 +282,14 @@
             box-shadow: 0 0 15px rgba(0, 123, 255, 0.6), 0 0 30px rgba(0, 123, 255, 0.4);
         }
 
-.channel-preview {
-    transition: all 0.3s ease-in-out;
-}
+        .channel-preview {
+            transition: all 0.3s ease-in-out;
+        }
 
-.channel-preview:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-}
+        .channel-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
 
         /* FAQ specific styles */
         .faq-item {
@@ -284,17 +317,31 @@
         }
 
         .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-in-out;
-            padding: 0 1rem;
+            display: none;
+            padding: 0 1rem 1rem 1rem;
+            color: #e0e0e0;
         }
 
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-            /* Adjust as needed for content */
-            padding-bottom: 1rem;
+
+
+        /* Assurez-vous que la section hero est un conteneur de positionnement 
+*/
+        .hero-banner {
+            position: relative;
+            height: 400px;
+            /* Hauteur pour mobile */
+            overflow: hidden;
+            /* Empêche le débordement */
         }
+
+        /* Ajuster la hauteur pour les écrans plus grands */
+        @media (min-width: 768px) {
+            .hero-banner {
+                height: 600px;
+                /* Hauteur pour desktop */
+            }
+        }
+
     </style>
 </head>
 
@@ -358,7 +405,7 @@
     </header>
 
     <main class="pt-16 lg:pt-0">
-        <section id="hero" class="hero-banner">
+         <section id="hero" class="hero-banner">
             <div class="swiper banner-slide-1 top-slide">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img decoding="async"
@@ -399,7 +446,8 @@
                     <div class="swiper-slide"><img decoding="async"
                             src="https://tellystudio.com/wp-content/uploads/2024/03/slide-8.webp" alt="Slider"></div>
                     <div class="swiper-slide"><img decoding="async"
-                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-4.webp" alt="Slider"></div>
+                            src="https://tellystudio.com/wp-content/uploads/2024/03/slide-4.webp" alt="Slider">
+                    </div>
                     <div class="swiper-slide"><img decoding="async"
                             src="https://tellystudio.com/wp-content/uploads/2024/03/slide-1.webp" alt="Slider"></div>
                     <div class="swiper-slide"><img decoding="async"
@@ -431,20 +479,15 @@
             </div>
 
             <div class="hero-overlay"></div>
-
             <div class="text-center px-4 py-10 sm:py-12 md:py-16 lg:py-20 max-w-4xl mx-auto">
                 <p class="hero-subtitle">FASTEST IPTV CONNECTION</p>
-                <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl">Le premier fournisseur IPTV<br> que vous allez
-                    vraiment
-                    apprécier.</h1>
-                <p class="hero-description text-base sm:text-lg">Dites
-                    adieu aux coupures et aux ralentissements. Profitez d'un
-                    divertissement en HD et 4K d'une clarté exceptionnelle, avec plus de
-                    30 000 chaînes, dont les meilleurs sports des USA et du Royaume-Uni,
-                    ainsi que vos programmes internationaux préférés.</p>
-                <a href="#pricing" class="hero-button inline-block">CHOOSE YOUR SUBSCRIPTION PLAN</a>
-
-                <div class="partenaire-logo mt-10">
+                <h1 class="hero-title">Le premier fournisseur IPTV<br> que vous allez vraiment apprécier.</h1>
+                <p class="hero-description">Dites adieu aux coupures et aux ralentissements. Profitez d’un
+                    divertissement en HD et 4K d’une clarté exceptionnelle, avec plus de 30 000 chaînes, dont les
+                    meilleurs sports des USA et du
+                    Royaume-Uni, ainsi que vos programmes internationaux préférés.</p>
+                <a href="#pricing" class="hero-button">CHOOSE YOUR SUBSCRIPTION PLAN</a>
+                <div class="partenaire-logo">
                     <div class="slider-track">
                         <img src="https://tellystudio.com/wp-content/uploads/2025/01/fox.png" alt="HBO Logo"
                             class="hero-logo-hbo mx-auto">
@@ -488,6 +531,7 @@
                             class="hero-logo-hbo mx-auto">
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -593,32 +637,32 @@
                 <div class="channel-carousel">
                     <div class="channel-preview p-2 md:p-4 rounded-xl">
                         <img src="https://variety.com/wp-content/uploads/2016/04/canal-plus.jpg?w=1000&h=563&crop=1"
-                            alt="Canal+ Logo" class="img rounded-lg mb-2">
+                            alt="Canal+ Logo" class="w-[160px] h-[100px] img rounded-lg mb-2">
                         <p class="text-center text-gray-400 text-sm md:text-base">CANAL+</p>
                     </div>
                     <div class="channel-preview p-2 md:p-4 rounded-xl">
                         <img src="https://tse1.mm.bing.net/th/id/OIP.U_OvNbJpdN7SVem0DptGjQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"
-                            alt="Sport TV Logo" class="img rounded-lg mb-2">
+                            alt="Sport TV Logo" class=" w-[160px] h-[100px] img rounded-lg mb-2">
                         <p class="text-center text-gray-400 text-sm md:text-base">Sport TV</p>
                     </div>
                     <div class="channel-preview p-2 md:p-4 rounded-xl">
                         <img src="https://th.bing.com/th/id/OIP.xYbikyYhxb00yqp0z7hpigHaCa?w=346&h=114&c=7&r=0&o=7&pid=1.7&rm=3"
-                            alt="M Movies Logo" class="img rounded-lg mb-2">
+                            alt="M Movies Logo" class="w-[160px] h-[100px] img rounded-lg mb-2">
                         <p class="text-center text-gray-400 text-sm md:text-base">M Movies</p>
                     </div>
                     <div class="channel-preview p-2 md:p-4 rounded-xl">
                         <img src="https://wpuploads.appadvice.com/wp-content/uploads/2015/06/natgeo.jpg"
-                            alt="National Geo Logo" class="rounded-lg mb-2">
+                            alt="National Geo Logo" class="w-[160px] h-[100px] rounded-lg mb-2">
                         <p class="text-center text-gray-400 text-sm md:text-base">National Geo</p>
                     </div>
                     <div class="channel-preview p-2 md:p-4 rounded-xl">
                         <img src="https://www.senenews.com/wp-content/uploads/2023/11/rts-1-600x314-watermarked.jpg"
-                            alt="RTS 1 Logo" class="img rounded-lg mb-2">
+                            alt="RTS 1 Logo" class="w-[160px] h-[100px] img rounded-lg mb-2">
                         <p class="text-center text-gray-400 text-sm md:text-base">RTS 1</p>
                     </div>
                     <div class="channel-preview p-2 md:p-4 rounded-xl">
                         <img src="https://tvendirect.net/wp-content/uploads/2023/04/Africa-24.png" alt="Africa 24 Logo"
-                            class="img rounded-lg mb-2">
+                            class="w-[160px] h-[100px] img rounded-lg mb-2">
                         <p class="text-center text-gray-400 text-sm md:text-base">Africa 24</p>
                     </div>
                 </div>
@@ -674,7 +718,7 @@
                             mobile ?</div>
                         <div class="faq-answer">
                             <p class="text-gray-300 text-sm md:text-base">Nous acceptons les paiements via Orange Money
-                                et MoMo.
+                                ,MoMo carte bancaire et Paypal.
                                 Lorsque vous choisissez votre offre et validez, vous serez invité à
                                 sélectionner votre mode de paiement. Une notification vous sera
                                 envoyée sur votre téléphone pour confirmer la transaction en entrant
@@ -804,10 +848,11 @@
                 ]
             });
 
-            // FAQ Toggle 
+            // FAQ Toggle (fix: cible le bon .faq-answer dans .faq-item)
             $('.faq-question').on('click', function () {
-                $(this).parent().toggleClass('active');
-                $(this).next('.faq-answer').slideToggle(300);
+                var $item = $(this).closest('.faq-item');
+                $item.toggleClass('active');
+                $item.find('.faq-answer').stop(true, true).slideToggle(300);
             });
         }); 
     </script>
